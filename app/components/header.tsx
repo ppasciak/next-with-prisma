@@ -22,8 +22,8 @@ const navItems = [
 
 const Header = () => {
     return (
-        <header className="sticky max-w-3xl mx-auto py-2">
-            <nav>
+        <header className="sticky top-0 bg-gray-100/75 dark:bg-gray-900/75 py-4 backdrop-blur-sm">
+            <nav className="max-w-3xl mx-auto">
                 <ul className="flex justify-between">
                     {navItems.map((link) => (
                         <Link key={link.url} href={link.url}>

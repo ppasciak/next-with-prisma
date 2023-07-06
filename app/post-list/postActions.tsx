@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { reactToPost } from "@/services/fetches";
 import Button from '../components/button';
+import { PostReactionType } from "@/types/types";
 
 type PostActionsProps = {
     likes: number;
@@ -13,7 +14,7 @@ const PostActions: React.FC<PostActionsProps> = ({ likes, postId }) => {
     const [currentLikes, setCurrentLikes] = useState(likes);
     const [disableButtons, setDisableButtons] = useState(false);
 
-    const handleClick = async (type: 'like' | 'unlike') => {
+    const handleClick = async (type: PostReactionType) => {
         setDisableButtons(true)
         const {data} = await reactToPost({ postId, type });
         if('likes' in data) {
@@ -28,7 +29,7 @@ const PostActions: React.FC<PostActionsProps> = ({ likes, postId }) => {
             <Button onClick={() => handleClick('like')} disabled={disableButtons}>
                 Like
             </Button>
-            <Button onClick={() => handleClick('unlike')} disabled={disableButtons}>
+            <Button onClick={() => handleClick('unlike')} variant="secondary" disabled={disableButtons}>
                 Dislike
             </Button>
         </div>

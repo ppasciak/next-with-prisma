@@ -1,5 +1,6 @@
 import React from "react";
 import UserForm from "./userForm";
+import Heading from "../components/heading";
 
 export const metadata = {
     title: "Add user page",
@@ -8,7 +9,7 @@ export const metadata = {
 const AddUser = () => {
     return (
         <>
-            <h2>Add User</h2>
+            <Heading>Add User</Heading>
             <UserForm />
         </>
     );

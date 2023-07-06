@@ -19,11 +19,10 @@ const PostComments = ({ postId }: PostCommentsProps) => {
     const fetchComments = async () => {
         const response = await getPostComments(postId);
 
-        if('comments' in response.data) {
+        if ("comments" in response.data) {
             setPostComments(response?.data.comments);
             setCommentsLoading(false);
         }
-
     };
 
     const refetchComments = () => {
@@ -40,9 +39,7 @@ const PostComments = ({ postId }: PostCommentsProps) => {
     const loading = commentsLoading ? <p>Loading...</p> : null;
 
     const commentsList = postComments?.length ? (
-        postComments.map((comment, i) => (
-            <Comment key={i} data={comment} />
-        ))
+        postComments.map((comment, i) => <Comment key={i} data={comment} />)
     ) : (
         <div className="text-gray-200 text-center text-xs">
             No comments found
@@ -51,7 +48,11 @@ const PostComments = ({ postId }: PostCommentsProps) => {
 
     return (
         <>
-            <Button type="button" action={() => setShowComments(!showComments)}>
+            <Button
+                type="button"
+                variant={"secondary"}
+                action={() => setShowComments(!showComments)}
+            >
                 Show comments
             </Button>
             {showComments ? (

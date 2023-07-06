@@ -1,5 +1,5 @@
 import React from "react";
-import { PostWithUser, Post, User, PostWithUserAndImage } from "@/types/types";
+import { PostWithUserAndImage } from "@/types/types";
 import PostActions from "../post-list/postActions";
 import PostComments from "./postComments";
 import Image from "next/image";
@@ -10,15 +10,15 @@ type PostItemType = {
 
 const PostItem: React.FC<PostItemType> = ({ data }) => {
     return (
-        <article className="border-b border-b-white w-full p-2">
+        <article className="border-b border-b-white w-full p-2 ">
             {data.image ? (
                 <Image
                     blurDataURL={data.image.thumbSrc}
                     src={data.image.fullSrc}
                     placeholder="blur"
                     alt="Picture of the author"
-                    width={500}
-                    height={500}
+                    width={data.image.width}
+                    height={data.image.height}
                 />
             ) : null}
             <header>

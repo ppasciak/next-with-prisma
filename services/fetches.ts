@@ -1,17 +1,16 @@
 import client from "./client";
+import { User, Post, PostReactionType } from "../types/types";
 import {
-    User,
-    Post,
-} from "../types/types";
-import { PostUserResponseType } from "../app/api/user/route";
-import { GetUserResponseType } from "../app/api/user/[id]/route";
-import { GetUsersResponseType } from "../app/api/users/route";
-import { GetUserWithPostsType } from "../app/api/user-with-posts/[id]/route";
-import { GetPostsType } from "../app/api/posts/route";
-import { UpdatePostLikesType } from "../app/api/like-post/route";
-import { PostPostType } from "../app/api/post/route";
-import { GetPostCommentsType } from "../app/api/post-comments/[id]/route";
-import { PostPostCommentType } from "../app/api/post-comment/route";
+    PostUserResponseType,
+    GetUserResponseType,
+    GetUsersResponseType,
+    GetUserWithPostsType,
+    GetPostsType,
+    UpdatePostLikesType,
+    PostPostType,
+    GetPostCommentsType,
+    PostPostCommentType,
+} from "../app/api/types";
 
 export const getAllUsers = async () => {
     const response = await client.get<GetUsersResponseType>("/users");
@@ -43,7 +42,7 @@ export const getAllPosts = async () => {
 
 type ReactToPostPayload = {
     postId: number;
-    type: "like" | "unlike";
+    type: PostReactionType;
 };
 
 export const reactToPost = async (data: ReactToPostPayload) => {

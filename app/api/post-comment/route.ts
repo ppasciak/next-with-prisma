@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/services/prisma";
-import { ErrorResponseType } from "@/types/types";
+import { ErrorResponseType, PostComment } from "@/types/types";
 
 type SuccessType = {
-    postComment: any;
+    postComment: PostComment;
 };
 
 export type PostPostCommentType = SuccessType | ErrorResponseType;

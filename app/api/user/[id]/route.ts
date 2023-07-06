@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
 import prisma from "@/services/prisma";
-import { User } from "@/types/types";
+import { User, ErrorResponseType } from "@/types/types";
 
 type SuccessType  = {
     user: User;
 }
 
-type ErrorType = {
-    error: { message: string };
-}
-
-export type GetUserResponseType = SuccessType | ErrorType;
+export type GetUserResponseType = SuccessType | ErrorResponseType;
 
 export async function GET(
     request: Request,

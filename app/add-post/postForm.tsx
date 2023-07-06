@@ -6,6 +6,7 @@ import { postPost } from "../../services/fetches";
 import { isAxiosError } from "axios";
 import { useToast } from "@/context/notificationContext";
 import { useUserList } from "./useUserList";
+import FileDropZone from "../components/fileDropZone";
 
 type FormData = {
     authorId: number;
@@ -18,22 +19,20 @@ const PostForm = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const { successToast, errorToast } = useToast();
     const { userList } = useUserList();
-    console.log(userList);
-    
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files && event.target.files[0];
-        if (file) {
-            setSelectedFile(file);
+
+    const handleFileChange = (files: File) => {
+        if (files) {
+            setSelectedFile(files);
         }
     };
 
     const onSubmit = async (data: FormData) => {
-        if(selectedFile) {
+        if (selectedFile) {
             data.file = selectedFile;
-        }
+        }        
 
         try {
-            const postData = await postPost(data);
+            const postData = await postPost(data);            
             if ("id" in postData.data) {
                 reset();
                 successToast("Post was added!");
@@ -47,15 +46,7 @@ const PostForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="block my-2">
-                image:
-                <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    onChange={handleFileChange}
-                />
-            </label>
+            <FileDropZone onFileChange={handleFileChange}/>
             <div>
                 <label className="block my-2">
                     Author:

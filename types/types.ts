@@ -1,4 +1,9 @@
-import { User as UserModel, Post as PostModel, PostComment as PostCommentModel, PostImage as PostImageModel } from "@prisma/client";
+import {
+    User as UserModel,
+    Post as PostModel,
+    PostComment as PostCommentModel,
+    PostImage as PostImageModel,
+} from "@prisma/client";
 
 export type User = UserModel;
 
@@ -8,7 +13,7 @@ export type PostImage = PostImageModel;
 
 export type PostWithImage = Post & {
     image: PostImage;
-}
+};
 
 export type PostWithUser = Post & {
     author: User;
@@ -20,19 +25,21 @@ export type PostWithUserAndImage = Post & {
 };
 
 export type UserWithPost = User & {
-    posts: PostWithImage[]
+    posts: PostWithImage[];
 };
 
 export type PostComment = PostCommentModel;
 
-export type PostCommentWithUser =  Pick<PostComment, 'createdAt' | 'content'> & {
-    author: Pick<User, 'email' | 'name'>
+export type PostCommentWithUser = Pick<PostComment, "createdAt" | "content"> & {
+    author: Pick<User, "email" | "name">;
 };
 
 export type PostWithComments = PostComment & {
-    commment: PostComment[]
-}
+    commment: PostComment[];
+};
 
 export type ErrorResponseType = {
     error: { message: string };
 };
+
+export type PostReactionType = "like" | "unlike";

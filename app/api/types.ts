@@ -1,0 +1,9 @@
+export type { PostUserResponseType } from "./user/route";
+export type { GetUserResponseType } from "./user/[id]/route";
+export type { GetUsersResponseType } from "./users/route";
+export type { GetUserWithPostsType } from "./user-with-posts/[id]/route";
+export type { GetPostsType } from "./posts/route";
+export type { UpdatePostLikesType } from "./like-post/route";
+export type { PostPostType } from "./post/route";
+export type { GetPostCommentsType } from "./post-comments/[id]/route";
+export type { PostPostCommentType } from "./post-comment/route";

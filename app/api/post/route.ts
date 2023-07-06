@@ -6,16 +6,13 @@ import mime from "mime";
 import { buffer } from "stream/consumers";
 import { v4 as uuidv4 } from "uuid";
 import sharp from "sharp";
+import { ErrorResponseType } from "@/types/types";
 
 type SuccessType = {
     id: number;
 };
 
-type ErrorType = {
-    error: { message: string };
-};
-
-export type PostPostType = SuccessType | ErrorType;
+export type PostPostType = SuccessType | ErrorResponseType;
 
 enum SIZES {
     FULL = "full",
@@ -30,7 +27,7 @@ export async function POST(
     const authorId = formData.get("authorId")?.toString();
     const content = formData.get("content")?.toString();
     const file = formData.get("file") as Blob | null;
-    
+
     if (!authorId || !content) {
         return NextResponse.json(
             { error: { message: "Missing authorId or content" } },
@@ -48,12 +45,14 @@ export async function POST(
 
     if (file) {
         const imageSrc = await handleWriteImage(file);
-        if(SIZES.FULL in imageSrc) {
+        if (SIZES.FULL in imageSrc) {
             const postImage = await prisma.postImage.create({
                 data: {
                     fullSrc: imageSrc.full,
                     thumbSrc: imageSrc.thumb,
-                    postId: postData.id
+                    postId: postData.id,
+                    width: imageSrc.width,
+                    height: imageSrc.height,
                 },
             });
         }
@@ -64,7 +63,10 @@ export async function POST(
 
 const handleWriteImage = async (
     file: Blob
-): Promise<NextResponse<ErrorType> | { thumb: string; full: string }> => {
+): Promise<
+    | NextResponse<ErrorResponseType>
+    | { thumb: string; full: string; height: number; width: number }
+> => {
     const buffer = Buffer.from(await file.arrayBuffer());
     const imageId = uuidv4();
 
@@ -89,7 +91,11 @@ const handleWriteImage = async (
             thumbnailBuffer
         );
 
-        return getRelativeUls(imageId, filename);
+        return {
+            ...getRelativeUls(imageId, filename),
+            width: imageMeta.width || 0,
+            height: imageMeta.height || 0,
+        };
     } catch (e) {
         console.error("Error while trying to upload a file\n", e);
         return NextResponse.json(
@@ -129,8 +135,8 @@ type SizeObject = {
 
 const getRelativeUls = (imageId: string, filename: string) => {
     const uploadDirs: SizeObject = {
-        'thumb': '',
-        'full': ''
+        thumb: "",
+        full: "",
     };
 
     for (const size of Object.values(SIZES)) {
@@ -144,14 +150,10 @@ const getFilename = (name: string, type: string): string => {
     return `${name.replace(/\.[^/.]+$/, "")}-full.${mime.getExtension(type)}`;
 };
 
-const getDestination = (
-    type: string,
-    id: string,
-    relative = false
-) => {
+const getDestination = (type: string, id: string, relative = false) => {
     return join(
         relative ? "" : process.cwd(),
-        relative ? "" :"/public",
+        relative ? "" : "/public",
         "/uploads/",
         id,
         type

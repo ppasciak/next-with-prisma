@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
 import prisma from "@/services/prisma";
+import { PostReactionType, ErrorResponseType } from "@/types/types";
 
 type SuccessType  = {
     likes: number;
 }
 
-type ErrorType = {
-    error: { message: string };
-}
+export type UpdatePostLikesType = SuccessType | ErrorResponseType;
 
-export type UpdatePostLikesType = SuccessType | ErrorType;
-
-const updateLikes = (current: number, type: 'like' | 'unlike') => {
+const updateLikes = (current: number, type: PostReactionType) => {
     if(type === 'unlike' &&  current === 0) return 0;
     if(type === 'unlike') return current - 1;
     if(type === 'like') return current + 1;
