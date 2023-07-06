@@ -101,7 +101,7 @@ const handleWriteImage = async (
 
 const createFolders = async (imageId: string) => {
     const uploadDirs: { [key: string]: string } = {};
-    for (let size of Object.values(SIZES)) {
+    for (const size of Object.values(SIZES)) {
         const sizeDir = getDestination(size, imageId);
         uploadDirs[size] = sizeDir;
 
@@ -133,7 +133,7 @@ const getRelativeUls = (imageId: string, filename: string) => {
         'full': ''
     };
 
-    for (let size of Object.values(SIZES)) {
+    for (const size of Object.values(SIZES)) {
         const sizeDir = getDestination(size, imageId, true);
         uploadDirs[size] = join(sizeDir, filename);
     }
@@ -147,7 +147,7 @@ const getFilename = (name: string, type: string): string => {
 const getDestination = (
     type: string,
     id: string,
-    relative: boolean = false
+    relative = false
 ) => {
     return join(
         relative ? "" : process.cwd(),

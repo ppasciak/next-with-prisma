@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/context/notificationContext";
 import client from "@/services/client";
 
 export const ImageForm = () => {
-    const { register, handleSubmit, reset, setValue } = useForm();
-    const { successToast, errorToast } = useToast();
+    const { handleSubmit } = useForm();
+    const { errorToast } = useToast();
     const [selectedFile, setSelectedFile] = useState<File>();
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +15,7 @@ export const ImageForm = () => {
         }
     };
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async () => {
         if (!selectedFile) {
             errorToast("Missing file");
             return;

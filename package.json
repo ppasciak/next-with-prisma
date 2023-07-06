@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prisma": "npx prisma generate && npx prisma migrate dev",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
@@ -17,7 +17,6 @@
     "@types/react-toastify": "^4.1.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
-    "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "mime": "^3.0.0",
     "moment": "^2.29.4",
@@ -37,6 +36,10 @@
     "@types/mime": "^3.0.1",
     "@types/node": "^20.3.1",
     "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
     "prisma": "^4.15.0"
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import UserForm from "./userForm";
-import { Loader } from "@/app/components";
 
 export const metadata = {
     title: "Add user page",

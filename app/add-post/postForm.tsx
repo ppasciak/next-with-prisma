@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { User } from "../../types/types";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAllUsers, postPost } from "../../services/fetches";
+import { postPost } from "../../services/fetches";
 import { isAxiosError } from "axios";
 import { useToast } from "@/context/notificationContext";
 import { useUserList } from "./useUserList";
@@ -15,7 +14,7 @@ type FormData = {
 };
 
 const PostForm = () => {
-    const { register, handleSubmit, reset, setValue } = useForm<FormData>();
+    const { register, handleSubmit, reset } = useForm<FormData>();
     const [selectedFile, setSelectedFile] = useState<File>();
     const { successToast, errorToast } = useToast();
     const { userList } = useUserList();

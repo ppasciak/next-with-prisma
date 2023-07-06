@@ -12,8 +12,8 @@ type PostCommentsProps = {
 };
 
 const PostComments = ({ postId }: PostCommentsProps) => {
-    const [showComments, setShowComments] = useState<Boolean>(false);
-    const [commentsLoading, setCommentsLoading] = useState<Boolean>(false);
+    const [showComments, setShowComments] = useState<boolean>(false);
+    const [commentsLoading, setCommentsLoading] = useState<boolean>(false);
     const [postComments, setPostComments] = useState<PostCommentWithUser[]>();
 
     const fetchComments = async () => {

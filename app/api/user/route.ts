@@ -3,7 +3,7 @@ import prisma from "@/services/prisma";
 import { ErrorResponseType } from "@/types/types";
 
 type SuccessType = {
-    id: Number;
+    id: number;
 };
 
 export type PostUserResponseType = SuccessType | ErrorResponseType;

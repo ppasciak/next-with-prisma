@@ -10,7 +10,6 @@ export type PostWithImage = Post & {
     image: PostImage;
 }
 
-
 export type PostWithUser = Post & {
     author: User;
 };
