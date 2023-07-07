@@ -1,47 +1,23 @@
 import React, { ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const button = cva(
-    [
-        "border-primary-700",
-        "border"
-    ],
-    {
-        variants: {
-            variant: {
-                primary: [
-                    "bg-primary-700"
-                ],
-                secondary: [
-                    
-                ],
-            },
-            size: {
-                sm: [
-                    "min-w-20",
-                    "h-full",
-                    "min-h-10",
-                    "text-sm",
-                    "py-1.5",
-                    "px-4",
-                ],
-                lg: [
-                    "min-w-32",
-                    "h-full",
-                    "min-h-12",
-                    "text-lg",
-                    "py-2.5",
-                    "px-6",
-                ],
-            },
-            underline: { true: ["underline"], false: [] },
+const button = cva(["border-primary-700", "border"], {
+    variants: {
+        variant: {
+            primary: ["bg-primary-700"],
+            secondary: [],
         },
-        defaultVariants: {
-            variant: "primary",
-            size: "sm",
+        size: {
+            sm: ["min-w-20", "h-full", "min-h-10", "text-sm", "py-1.5", "px-4"],
+            lg: ["min-w-32", "h-full", "min-h-12", "text-lg", "py-2.5", "px-6"],
         },
-    }
-);
+        underline: { true: ["underline"], false: [] },
+    },
+    defaultVariants: {
+        variant: "primary",
+        size: "sm",
+    },
+});
 
 interface ButtonProps
     extends React.ComponentPropsWithoutRef<"button">,

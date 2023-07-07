@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
     return (
-        <>
+        <div className="self-center">
             <svg
                 width="48"
                 height="48"
@@ -43,7 +43,7 @@ const Loader = () => {
                     />
                 </path>
             </svg>
-        </>
+        </div>
     );
 };
 

@@ -1,9 +1,13 @@
 # Next 13 + Prisma PoC
+
+Concept app that uses NextJS as fullstack framework that handles requests from frontend and serves data from database. Prisma is used as source of data types for frontend and backend parts, and keeps them in sync with data types from database. 
+
 ⚛️ Next 13\
 💨 Tailwind\
 🟦 TS\
 🔌 Prisma \
-🗂️ Dockerized MySQL DB 
+🗂️ Dockerized MySQL DB\
+🗃️ CVA 
 
 ## Requirements
 🟩 Node >=14.18

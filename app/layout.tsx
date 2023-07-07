@@ -18,7 +18,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ToastProvider>
                     <Header />
-                    <main className="flex min-h-screen flex-col items-center md:p-24 p-4 max-w-3xl mx-auto">
+                    <main className="flex min-h-screen flex-col md:p-24 p-4 max-w-3xl mx-auto">
                         {children}
                     </main>
                 </ToastProvider>

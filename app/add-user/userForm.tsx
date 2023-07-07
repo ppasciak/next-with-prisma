@@ -12,7 +12,6 @@ type FormValues = {
     email: string;
 };
 
-
 export const UserForm = () => {
     const {
         register,
@@ -28,7 +27,7 @@ export const UserForm = () => {
             if ("id" in response.data) {
                 reset();
                 successToast("User created successfully");
-             }
+            }
         } catch (error) {
             if (isAxiosError(error)) {
                 errorToast(error.response?.data.error.message);
@@ -52,7 +51,10 @@ export const UserForm = () => {
                 <input
                     className="block my-2"
                     type="text"
-                    {...register("email", { required: true })}
+                    {...register("email", {
+                        required: true,
+                        pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                    })}
                 />
                 {errors.email && <FieldError label="Invalid emai" />}
             </label>

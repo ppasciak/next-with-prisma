@@ -1,6 +1,8 @@
 import React from "react";
 import { getAllUsers } from "@/services/fetches";
 import Link from "next/link";
+import Heading from "../components/heading";
+import Message from "../components/message";
 
 export const metadata = {
     title: "User list page",
@@ -9,12 +11,10 @@ export const metadata = {
 const PostList = async () => {
     const response = await getAllUsers();
     let userElements: React.JSX.Element | React.JSX.Element[] = (
-        <div>
-            <h3>No users found</h3>
-        </div>
+        <Message variant={"warning"}>No users find</Message>
     );
 
-    if ("users" in response.data) {
+    if ("users" in response.data && response.data.users.length) {
         userElements = response.data.users.map((user) => (
             <li key={user.id}>
                 <Link href={`/user/${user.id}`}>
@@ -27,7 +27,7 @@ const PostList = async () => {
 
     return (
         <>
-            <h2>Users</h2>
+            <Heading variant={"primary"}>Users</Heading>
             <ul className="text-left">{userElements}</ul>
         </>
     );
