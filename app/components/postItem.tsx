@@ -10,7 +10,13 @@ type PostItemType = {
 
 const PostItem: React.FC<PostItemType> = ({ data }) => {
     return (
-        <article className="border-b border-b-white w-full p-2 ">
+        <article className="my-2 bg-gray-200 dark:bg-gray-700 shadow-sm w-full p-2 rounded-md">
+             <header className="mb-2">
+                <h4>
+                    {data.author.name}{" "}
+                    <span className="text-gray-500 text-sm">({data.author.email})</span>
+                </h4>
+            </header>
             {data.image ? (
                 <Image
                     blurDataURL={data.image.thumbSrc}
@@ -21,12 +27,6 @@ const PostItem: React.FC<PostItemType> = ({ data }) => {
                     height={data.image.height}
                 />
             ) : null}
-            <header>
-                <h4>
-                    {data.author.name}{" "}
-                    <span className="text-gray-500">({data.author.email})</span>
-                </h4>
-            </header>
             <div className="dark:bg-gray-800 min-h-[4rem] my-2 p-1 bg-gray-300">
                 {data.content}
             </div>

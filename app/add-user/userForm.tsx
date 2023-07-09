@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { postUser } from "@/services/fetches";
-import { FieldError } from "@/app/components";
+import { Button, FieldError } from "@/app/components";
 import { useToast } from "@/context/notificationContext";
 import { isAxiosError } from "axios";
 
@@ -58,7 +58,7 @@ export const UserForm = () => {
                 />
                 {errors.email && <FieldError label="Invalid emai" />}
             </label>
-            <button type="submit">Add</button>
+            <Button type="submit">Add</Button>
         </form>
     );
 };

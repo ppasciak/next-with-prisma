@@ -7,6 +7,7 @@ import { isAxiosError } from "axios";
 import { useToast } from "@/context/notificationContext";
 import { useUserList } from "./useUserList";
 import FileDropZone from "../components/fileDropZone";
+import { Button } from "../components";
 
 type FormData = {
     authorId: number;
@@ -16,7 +17,7 @@ type FormData = {
 
 const PostForm = () => {
     const { register, handleSubmit, reset } = useForm<FormData>();
-    const [selectedFile, setSelectedFile] = useState<File>();
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const { successToast, errorToast } = useToast();
     const { userList } = useUserList();
 
@@ -30,11 +31,12 @@ const PostForm = () => {
         if (selectedFile) {
             data.file = selectedFile;
         }        
-
-        try {
+        
+        try {            
             const postData = await postPost(data);            
             if ("id" in postData.data) {
                 reset();
+                setSelectedFile(null);
                 successToast("Post was added!");
             }
         } catch (error) {
@@ -46,7 +48,7 @@ const PostForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <FileDropZone onFileChange={handleFileChange}/>
+            <FileDropZone onFileChange={handleFileChange} fileValue={selectedFile}/>
             <div>
                 <label className="block my-2">
                     Author:
@@ -72,7 +74,7 @@ const PostForm = () => {
                     />
                 </label>
             </div>
-            <button type="submit">Add Post</button>
+            <Button type="submit">Add Post</Button>
         </form>
     );
 };
